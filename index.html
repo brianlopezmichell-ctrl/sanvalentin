@@ -159,27 +159,51 @@ const mediaBox=document.getElementById("mediaBox");
 const textBox=document.getElementById("textBox");
 
 function cambiar(){
+
     mediaBox.innerHTML="";
     textBox.innerHTML=mensajes[msgIndex];
 
     let file=mediaFiles[index];
 
     if(file.includes(".mp4")){
+
         let video=document.createElement("video");
         video.src=file;
         video.autoplay=true;
         video.muted=true;
         video.playsInline=true;
+        video.controls=false;
+        video.style.maxWidth="100%";
+        video.style.maxHeight="100%";
+        video.style.objectFit="contain";
+
         mediaBox.appendChild(video);
+
+        video.onended = function(){
+            siguiente();
+        };
+
     }else{
+
         let img=document.createElement("img");
         img.src=file;
-        mediaBox.appendChild(img);
-    }
+        img.style.maxWidth="100%";
+        img.style.maxHeight="100%";
+        img.style.objectFit="contain";
 
+        mediaBox.appendChild(img);
+
+        setTimeout(siguiente,5000);
+    }
+}
+
+function siguiente(){
     index=(index+1)%mediaFiles.length;
     msgIndex=(msgIndex+1)%mensajes.length;
+    cambiar();
 }
+
+cambiar();
 
 setInterval(cambiar,5000);
 cambiar();
