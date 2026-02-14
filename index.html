@@ -8,62 +8,71 @@
 body{
     margin:0;
     padding:0;
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
-    font-family: 'Arial', sans-serif;
-    text-align:center;
     overflow:hidden;
+    font-family: 'Georgia', serif;
+    text-align:center;
+    background: linear-gradient(135deg,#ff4e8a,#ff758c,#ff9eb5);
+    background-size: 300% 300%;
+    animation: fondo 10s infinite alternate;
     color:white;
+}
+
+@keyframes fondo{
+    0%{background-position: left;}
+    100%{background-position: right;}
 }
 
 h1{
     margin-top:40px;
-    font-size:50px;
-    text-shadow:3px 3px 10px rgba(0,0,0,0.4);
+    font-size:55px;
+    letter-spacing:2px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8);
     animation: brillo 2s infinite alternate;
 }
 
 @keyframes brillo{
-    from{opacity:0.8;}
-    to{opacity:1;}
+    from{transform:scale(1);}
+    to{transform:scale(1.05);}
 }
 
 .contenedor{
-    position:relative;
-    width:100%;
-    height:70vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    margin-top:40px;
 }
 
-.slide{
-    position:absolute;
-    opacity:0;
-    transform:scale(0.8);
-    transition: all 1s ease;
-}
-
-.slide.activo{
-    opacity:1;
-    transform:scale(1);
-}
-
-img, video{
-    width:350px;
-    height:450px;
+img{
+    width:380px;
+    height:480px;
     object-fit:cover;
-    border-radius:20px;
-    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+    animation: aparecer 2s ease;
+}
+
+@keyframes aparecer{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
 }
 
 .corazon{
     position:fixed;
-    animation: flotar 6s linear infinite;
+    top:-10px;
+    animation: caer 6s linear infinite;
+}
+
+@keyframes caer{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
+}
+
+.brillo{
+    position:fixed;
+    font-size:20px;
+    animation: flotar 5s linear infinite;
 }
 
 @keyframes flotar{
-    0%{ transform:translateY(100vh); opacity:1;}
-    100%{ transform:translateY(-10vh); opacity:0;}
+    0%{transform:translateY(100vh); opacity:1;}
+    100%{transform:translateY(-10vh); opacity:0;}
 }
 </style>
 </head>
@@ -72,45 +81,17 @@ img, video{
 
 <h1>💖 Feliz San Valentín mi amor 💖</h1>
 
-<!-- Música -->
 <audio autoplay loop>
     <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <div class="contenedor">
-
-    <div class="slide activo">
-        <img src="foto1.jpg">
-    </div>
-
-    <div class="slide">
-        <img src="foto2.jpg">
-    </div>
-
-    <div class="slide">
-        <video src="video1.mp4" autoplay muted loop></video>
-    </div>
-
-    <div class="slide">
-        <img src="foto3.jpg">
-    </div>
-
+    <img src="foto1.jpg">
 </div>
 
 <script>
 
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-
-function cambiarSlide(){
-    slides[index].classList.remove("activo");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("activo");
-}
-
-setInterval(cambiarSlide, 4000);
-
-// Corazones flotando
+// corazones cayendo
 function crearCorazon(){
     const corazon = document.createElement("div");
     corazon.innerHTML = "💗";
@@ -124,7 +105,23 @@ function crearCorazon(){
     },6000);
 }
 
-setInterval(crearCorazon,500);
+setInterval(crearCorazon,300);
+
+// brillitos
+function crearBrillo(){
+    const brillo = document.createElement("div");
+    brillo.innerHTML = "✨";
+    brillo.classList.add("brillo");
+    brillo.style.left = Math.random()*100 + "vw";
+    brillo.style.fontSize = Math.random()*15 + 10 + "px";
+    document.body.appendChild(brillo);
+
+    setTimeout(()=>{
+        brillo.remove();
+    },5000);
+}
+
+setInterval(crearBrillo,500);
 
 </script>
 
