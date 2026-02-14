@@ -125,6 +125,13 @@ cursor:pointer;
 </div>
 
 <script>
+    const musica = document.getElementById("musica");
+const overlay = document.getElementById("startOverlay");
+
+overlay.addEventListener("click", () => {
+    musica.play();
+    overlay.style.display = "none";
+});
 
 /* TODOS TUS ARCHIVOS */
 const media = [
