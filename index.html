@@ -153,40 +153,59 @@ const mensajes = [
 "Mi vida contigo es perfecta 💕"
 ];
 
-let index=0;
-let msgIndex=0;
-const mediaBox=document.getElementById("mediaBox");
-const textBox=document.getElementById("textBox");
+let index = 0;
+let msgIndex = 0;
 
-function cambiar(){
-    mediaBox.innerHTML="";
-    textBox.innerHTML=mensajes[msgIndex];
+const mediaBox = document.getElementById("mediaBox");
+const textBox = document.getElementById("textBox");
 
-    let file=mediaFiles[index];
+function mostrarSiguiente(){
 
-    if(file.includes(".mp4")){
-        let video=document.createElement("video");
-        video.src=file;
-        video.autoplay=true;
-        video.muted=true;
-        video.playsInline=true;
+    mediaBox.innerHTML = "";
+    textBox.innerHTML = mensajes[msgIndex];
+
+    let file = mediaFiles[index];
+
+    if(file.endsWith(".mp4")){
+
+        let video = document.createElement("video");
+        video.src = file;
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+
+        video.onended = avanzar;
+        video.onerror = avanzar;
+
         mediaBox.appendChild(video);
+
     }else{
-        let img=document.createElement("img");
-        img.src=file;
+
+        let img = document.createElement("img");
+        img.src = file;
+
+        img.onload = function(){
+            setTimeout(avanzar, 4000);
+        };
+
+        img.onerror = avanzar;
+
         mediaBox.appendChild(img);
     }
 
-    index=(index+1)%mediaFiles.length;
-    msgIndex=(msgIndex+1)%mensajes.length;
+    msgIndex = (msgIndex + 1) % mensajes.length;
 }
 
-setInterval(cambiar, 5000);
-cambiar();
+function avanzar(){
+    index = (index + 1) % mediaFiles.length;
+    mostrarSiguiente();
+}
 
-/* Corazones por toda la pantalla */
+mostrarSiguiente();
+
+/* Corazones */
 function crearCorazon(){
-    const heart=document.createElement("div");
+    const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML="❤️";
     heart.style.left=Math.random()*100+"vw";
@@ -194,11 +213,8 @@ function crearCorazon(){
     heart.style.fontSize=(15+Math.random()*30)+"px";
     document.body.appendChild(heart);
 
-    setTimeout(()=>{
-        heart.remove();
-    },8000);
+    setTimeout(()=>heart.remove(),8000);
 }
-
 setInterval(crearCorazon,300);
 
 /* Activar música en móviles */
