@@ -2,98 +2,130 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>San Valentín 💖</title>
+<title>Feliz San Valentín 💖</title>
+
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background: linear-gradient(to right, #ff9a9e, #fad0c4);
-        color: white;
-    }
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family: 'Arial', sans-serif;
+    text-align:center;
+    overflow:hidden;
+    color:white;
+}
 
-    .container {
-        margin-top: 100px;
-    }
+h1{
+    margin-top:40px;
+    font-size:50px;
+    text-shadow:3px 3px 10px rgba(0,0,0,0.4);
+    animation: brillo 2s infinite alternate;
+}
 
-    h1 {
-        font-size: 40px;
-    }
+@keyframes brillo{
+    from{opacity:0.8;}
+    to{opacity:1;}
+}
 
-    button {
-        padding: 15px 25px;
-        font-size: 18px;
-        margin: 10px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+.contenedor{
+    position:relative;
+    width:100%;
+    height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-    #yesBtn {
-        background-color: #ff4d6d;
-        color: white;
-    }
+.slide{
+    position:absolute;
+    opacity:0;
+    transform:scale(0.8);
+    transition: all 1s ease;
+}
 
-    #noBtn {
-        background-color: gray;
-        color: white;
-        position: absolute;
-    }
+.slide.activo{
+    opacity:1;
+    transform:scale(1);
+}
 
-    #contenido {
-        display: none;
-        margin-top: 40px;
-    }
+img, video{
+    width:350px;
+    height:450px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+}
 
-    img {
-        width: 250px;
-        height: 350px;
-        object-fit: cover;
-        border-radius: 15px;
-        margin: 10px;
-    }
+.corazon{
+    position:fixed;
+    animation: flotar 6s linear infinite;
+}
+
+@keyframes flotar{
+    0%{ transform:translateY(100vh); opacity:1;}
+    100%{ transform:translateY(-10vh); opacity:0;}
+}
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>¿Josselyn quieres ser mi San Valentín? 🙈💖</h1>
-    <button id="yesBtn">Shi 💕</button>
-    <button id="noBtn">Ño 😢</button>
+<h1>💖 Feliz San Valentín mi amor 💖</h1>
 
-    <div id="contenido">
-        <h2>Gracias por decir que shi mi amor 🤭❤️</h2>
-        <p>
-            Desde el día que nos conocimos todo cambió.  
-            Hemos pasado momentos hermosos, risas, aventuras  
-            y hasta momentos difíciles que superamos juntos.  
-            Eres el amor de mi vida, mi persona favorita y especial, quiero seguir viviendo aventuras y dificultades que nos ayudaran a mejorar, que nos harán más fuertes como pareja y seguir creando recuerdos contigo.🥰🥺❤️‍🩹
-        </p>
+<!-- Música -->
+<audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-        <!-- CAMBIA estas imágenes por tus fotos -->
+<div class="contenedor">
+
+    <div class="slide activo">
         <img src="foto1.jpg">
+    </div>
+
+    <div class="slide">
         <img src="foto2.jpg">
+    </div>
+
+    <div class="slide">
+        <video src="video1.mp4" autoplay muted loop></video>
+    </div>
+
+    <div class="slide">
         <img src="foto3.jpg">
     </div>
+
 </div>
 
 <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const contenido = document.getElementById("contenido");
 
-    yesBtn.addEventListener("click", () => {
-        contenido.style.display = "block";
-        yesBtn.style.display = "none";
-        noBtn.style.display = "none";
-    });
+let slides = document.querySelectorAll(".slide");
+let index = 0;
 
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    });
+function cambiarSlide(){
+    slides[index].classList.remove("activo");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("activo");
+}
+
+setInterval(cambiarSlide, 4000);
+
+// Corazones flotando
+function crearCorazon(){
+    const corazon = document.createElement("div");
+    corazon.innerHTML = "💗";
+    corazon.classList.add("corazon");
+    corazon.style.left = Math.random()*100 + "vw";
+    corazon.style.fontSize = Math.random()*30 + 20 + "px";
+    document.body.appendChild(corazon);
+
+    setTimeout(()=>{
+        corazon.remove();
+    },6000);
+}
+
+setInterval(crearCorazon,500);
+
 </script>
 
 </body>
