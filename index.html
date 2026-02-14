@@ -4,75 +4,86 @@
 <meta charset="UTF-8">
 <title>Feliz San Valentín 💖</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 body{
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    font-family: 'Georgia', serif;
-    text-align:center;
-    background: linear-gradient(135deg,#ff4e8a,#ff758c,#ff9eb5);
-    background-size: 300% 300%;
-    animation: fondo 10s infinite alternate;
-    color:white;
+margin:0;
+overflow:hidden;
+background:linear-gradient(to bottom,#ff758c,#ff7eb3);
+font-family:Arial, sans-serif;
+text-align:center;
+color:white;
 }
 
-@keyframes fondo{
-    0%{background-position: left;}
-    100%{background-position: right;}
-}
-
+/* Título elegante */
 h1{
-    margin-top:40px;
-    font-size:55px;
-    letter-spacing:2px;
-    text-shadow: 0 0 15px rgba(255,255,255,0.8);
-    animation: brillo 2s infinite alternate;
+font-family:'Great Vibes',cursive;
+font-size:60px;
+margin-top:30px;
+animation:fadeIn 3s ease-in-out;
+text-shadow:0 0 20px rgba(255,255,255,0.8);
 }
 
-@keyframes brillo{
-    from{transform:scale(1);}
-    to{transform:scale(1.05);}
+/* Contenedor */
+#slider{
+position:relative;
+width:350px;
+height:500px;
+margin:40px auto;
+overflow:hidden;
+border-radius:30px;
+box-shadow:0 0 30px rgba(255,255,255,0.7);
 }
 
-.contenedor{
-    margin-top:40px;
+/* Imágenes y videos */
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+transition:opacity 1.5s ease-in-out;
+border-radius:30px;
 }
 
-img{
-    width:380px;
-    height:480px;
-    object-fit:cover;
-    border-radius:25px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.5);
-    animation: aparecer 2s ease;
+/* Corazones cayendo */
+.heart{
+position:fixed;
+top:-10px;
+color:red;
+font-size:20px;
+animation:fall 5s linear infinite;
 }
 
-@keyframes aparecer{
-    from{opacity:0; transform:scale(0.8);}
-    to{opacity:1; transform:scale(1);}
+@keyframes fall{
+to{transform:translateY(100vh);}
 }
 
-.corazon{
-    position:fixed;
-    top:-10px;
-    animation: caer 6s linear infinite;
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
 }
 
-@keyframes caer{
-    0%{transform:translateY(-10vh);}
-    100%{transform:translateY(110vh);}
+/* Osito */
+#oso{
+position:fixed;
+bottom:-200px;
+right:20px;
+font-size:120px;
+animation:subir 5s forwards;
 }
 
-.brillo{
-    position:fixed;
-    font-size:20px;
-    animation: flotar 5s linear infinite;
+@keyframes subir{
+to{bottom:100px;}
 }
 
-@keyframes flotar{
-    0%{transform:translateY(100vh); opacity:1;}
-    100%{transform:translateY(-10vh); opacity:0;}
+#corazonOso{
+position:absolute;
+top:30px;
+left:35px;
+font-size:30px;
+color:white;
 }
 </style>
 </head>
@@ -81,47 +92,70 @@ img{
 
 <h1>💖 Feliz San Valentín mi amor 💖</h1>
 
+<div id="slider">
+
+<img src="foto1.jpg" class="slide">
+<video src="video18.jpg.mp4" class="slide" muted></video>
+<img src="foto2.jpg" class="slide">
+<video src="video24.jpg.mp4" class="slide" muted></video>
+<img src="foto3.jpg" class="slide">
+<video src="video25.jpg.mp4" class="slide" muted></video>
+<img src="foto4.jpg" class="slide">
+<video src="video26.jpg.mp4" class="slide" muted></video>
+
+</div>
+
+<!-- Música -->
 <audio autoplay loop>
-    <source src="musica.mp3" type="audio/mpeg">
+<source src="Maluma - ADMV (SPOTISAVER).mp3" type="audio/mpeg">
 </audio>
 
-<div class="contenedor">
-    <img src="foto1.jpg">
+<!-- Osito -->
+<div id="oso">
+🐻
+<div id="corazonOso">❤️<br>Te Amo</div>
 </div>
 
 <script>
 
-// corazones cayendo
-function crearCorazon(){
-    const corazon = document.createElement("div");
-    corazon.innerHTML = "💗";
-    corazon.classList.add("corazon");
-    corazon.style.left = Math.random()*100 + "vw";
-    corazon.style.fontSize = Math.random()*30 + 20 + "px";
-    document.body.appendChild(corazon);
+/* Slider automático */
+let slides=document.querySelectorAll(".slide");
+let index=0;
 
-    setTimeout(()=>{
-        corazon.remove();
-    },6000);
+function showSlide(){
+slides.forEach(s=>{
+s.style.opacity=0;
+if(s.tagName==="VIDEO"){
+s.pause();
+s.currentTime=0;
+}
+});
+
+let current=slides[index];
+current.style.opacity=1;
+
+if(current.tagName==="VIDEO"){
+current.play();
 }
 
-setInterval(crearCorazon,300);
-
-// brillitos
-function crearBrillo(){
-    const brillo = document.createElement("div");
-    brillo.innerHTML = "✨";
-    brillo.classList.add("brillo");
-    brillo.style.left = Math.random()*100 + "vw";
-    brillo.style.fontSize = Math.random()*15 + 10 + "px";
-    document.body.appendChild(brillo);
-
-    setTimeout(()=>{
-        brillo.remove();
-    },5000);
+index++;
+if(index>=slides.length){index=0;}
 }
 
-setInterval(crearBrillo,500);
+setInterval(showSlide,4000);
+showSlide();
+
+/* Corazones cayendo */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💗";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+10+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove();},5000);
+},300);
 
 </script>
 
