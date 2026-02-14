@@ -166,18 +166,26 @@ function mostrarSiguiente(){
 
     let file = mediaFiles[index];
 
-    if(file.endsWith(".mp4")){
+   if(file.endsWith(".mp4")){
 
-        let video = document.createElement("video");
-        video.src = file;
-        video.autoplay = true;
-        video.muted = true;
-        video.playsInline = true;
+    let video = document.createElement("video");
+    video.src = file;
+    video.muted = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.preload = "auto";
+    video.controls = false;
 
-        video.onended = avanzar;
-        video.onerror = avanzar;
+    video.addEventListener("loadeddata", function(){
+        video.play().catch(() => {});
+    });
 
-        mediaBox.appendChild(video);
+    video.addEventListener("ended", avanzar);
+    video.addEventListener("error", avanzar);
+
+    mediaBox.appendChild(video);
+
+}
 
     }else{
 
