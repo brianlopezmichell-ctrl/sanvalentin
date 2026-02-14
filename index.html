@@ -164,24 +164,30 @@ function cambiar(){
     textBox.innerHTML=mensajes[msgIndex];
 
     let file=mediaFiles[index];
+if(file.includes(".mp4")){
 
-    if(file.includes(".mp4")){
+    let video=document.createElement("video");
+    video.src=file;
+    video.autoplay=true;
+    video.muted=true;
+    video.playsInline=true;
+    video.controls=false;
+    video.style.maxWidth="100%";
+    video.style.maxHeight="100%";
+    video.style.objectFit="contain";
 
-        let video=document.createElement("video");
-        video.src=file;
-        video.autoplay=true;
-        video.muted=true;
-        video.playsInline=true;
-        video.controls=false;
-        video.style.maxWidth="100%";
-        video.style.maxHeight="100%";
-        video.style.objectFit="contain";
+    mediaBox.appendChild(video);
 
-        mediaBox.appendChild(video);
+    video.addEventListener("loadedmetadata", function(){
+        console.log("Duración:", video.duration);
+    });
 
-        video.onended = function(){
-            siguiente();
-        };
+    video.addEventListener("ended", function(){
+        siguiente();
+    });
+
+}
+    
 
     }else{
 
