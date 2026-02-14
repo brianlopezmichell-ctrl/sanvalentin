@@ -159,32 +159,37 @@ let msgIndex = 0;
 const mediaBox = document.getElementById("mediaBox");
 const textBox = document.getElementById("textBox");
 
-function mostrarSiguiente(){
+function cambiar(){
 
     mediaBox.innerHTML = "";
     textBox.innerHTML = mensajes[msgIndex];
 
     let file = mediaFiles[index];
 
-   if(file.endsWith(".mp4")){
+    if(file.endsWith(".mp4")){
 
-    let video = document.createElement("video");
-    video.src = file;
-    video.muted = true;
-    video.playsInline = true;
-    video.autoplay = true;
-    video.preload = "auto";
-    video.controls = false;
+        let video = document.createElement("video");
+        video.src = file;
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.style.maxWidth = "100%";
+        video.style.maxHeight = "100%";
+        video.style.objectFit = "contain";
+        mediaBox.appendChild(video);
 
-    video.addEventListener("loadeddata", function(){
-        video.play().catch(() => {});
-    });
+    } else {
 
-    video.addEventListener("ended", avanzar);
-    video.addEventListener("error", avanzar);
+        let img = document.createElement("img");
+        img.src = file;
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "100%";
+        img.style.objectFit = "contain";
+        mediaBox.appendChild(img);
+    }
 
-    mediaBox.appendChild(video);
-
+    index = (index + 1) % mediaFiles.length;
+    msgIndex = (msgIndex + 1) % mensajes.length;
 }
 
     }else{
