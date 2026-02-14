@@ -2,181 +2,237 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz San Valentín 💖</title>
+<title>💖 Feliz San Valentín 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff6a88, #ff99ac);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    text-align:center;
+    color:white;
 }
 
-/* TITULO ELEGANTE */
-h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 60px;
-    color: white;
-    text-shadow: 0 0 25px rgba(255,255,255,0.9);
-    margin-bottom: 20px;
+/* TITULO */
+h1{
+    font-family:'Great Vibes', cursive;
+    font-size:60px;
+    margin-top:20px;
+    text-shadow:0 0 15px white;
     animation: brillo 2s infinite alternate;
 }
 
-@keyframes brillo {
-    from { text-shadow: 0 0 15px white; }
-    to { text-shadow: 0 0 40px #ffdde1; }
+@keyframes brillo{
+    from{ text-shadow:0 0 10px white; }
+    to{ text-shadow:0 0 30px #fff; }
 }
 
 /* CONTENEDOR */
-.media-container {
-    width: 320px;
-    height: 500px;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 0 40px rgba(255,255,255,0.8);
-    position: relative;
-    animation: fade 1s ease-in-out;
+.media-container{
+    width:420px;
+    height:600px;
+    margin:30px auto;
+    border-radius:25px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
 }
 
-@keyframes fade {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
+/* IMAGEN Y VIDEO COMPLETO */
 .media-container img,
-.media-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.media-container video{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    border-radius:20px;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.9);}
+    to{opacity:1; transform:scale(1);}
 }
 
 /* CORAZONES */
-.corazon {
-    position: absolute;
-    color: #ff2e63;
-    font-size: 20px;
-    animation: caer 6s linear infinite;
+.heart{
+    position:fixed;
+    top:-20px;
+    color:#ff004f;
+    animation:fall linear infinite;
+    font-size:20px;
 }
 
-@keyframes caer {
-    0% { transform: translateY(-100px); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
 }
 
-/* MENSAJES LATERALES */
-.mensaje {
-    position: absolute;
-    font-size: 18px;
-    color: white;
-    opacity: 0.8;
-    animation: flotar 6s infinite alternate;
+/* MENSAJES */
+.mensaje{
+    position:fixed;
+    font-size:18px;
+    font-weight:300;
+    opacity:0;
+    animation:aparecer 6s ease forwards;
 }
 
-@keyframes flotar {
-    from { transform: translateY(0px); }
-    to { transform: translateY(30px); }
+@keyframes aparecer{
+    0%{opacity:0; transform:translateY(20px);}
+    20%{opacity:1;}
+    80%{opacity:1;}
+    100%{opacity:0; transform:translateY(-20px);}
 }
 
 </style>
 </head>
 
-<body onclick="iniciarMusica()">
+<body>
 
-<h1>💖 Feliz San Valentín mi amor 💖</h1>
+<h1>💞 Feliz San Valentín mi amor 💞</h1>
 
-<div class="media-container" id="media"></div>
+<div class="media-container" id="mediaContainer"></div>
 
-<audio id="musica" loop>
+<!-- MUSICA -->
+<audio id="musica" autoplay loop>
     <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-const archivos = [
-    "foto1.jpg",
-    "video18.jpg.mp4",
-    "foto2.jpg",
-    "video20.jpg.mp4",
-    "foto3.jpg",
-    "video24.jpg.mp4",
-    "foto4.jpg",
-    "video25.jpg.mp4"
+/* TODOS TUS ARCHIVOS */
+const media = [
+
+"foto1.jpg",
+"video18.jpg.mp4",
+"foto2.jpg",
+"video24.jpg.mp4",
+"foto3.jpg",
+"video25.jpg.mp4",
+"foto4.jpg",
+"video26.jpg.mp4",
+"foto5.jpg",
+"video28.jpg.mp4",
+"foto6.jpg",
+"foto7.jpg",
+"foto8.jpg",
+"foto9.jpg",
+"foto10.jpg",
+"foto11.jpg",
+"foto12.jpg",
+"foto13.jpg",
+"foto14.jpg",
+"foto15.jpg",
+"foto16.jpg",
+"foto17.jpg",
+"foto19.jpg",
+"foto20.jpg",
+"foto21.jpg",
+"foto22.jpg",
+"foto23.jpg",
+"foto27.jpg",
+"foto29.jpg"
+
 ];
 
-let indice = 0;
-const contenedor = document.getElementById("media");
+let index = 0;
+const container = document.getElementById("mediaContainer");
 
-function mostrarMedia() {
-    contenedor.innerHTML = "";
+/* MOSTRAR MEDIA */
+function showMedia(){
 
-    let elemento;
+    container.innerHTML="";
 
-    if (archivos[indice].endsWith(".mp4")) {
-        elemento = document.createElement("video");
-        elemento.src = archivos[indice];
-        elemento.autoplay = true;
-        elemento.muted = true;
-        elemento.loop = false;
-    } else {
-        elemento = document.createElement("img");
-        elemento.src = archivos[indice];
+    let file = media[index];
+
+    if(file.endsWith(".mp4")){
+        let video = document.createElement("video");
+        video.src = file;
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+        container.appendChild(video);
+
+        video.onended = ()=>{
+            nextMedia();
+        }
+
+    }else{
+        let img = document.createElement("img");
+        img.src = file;
+        container.appendChild(img);
+
+        setTimeout(nextMedia,5000);
     }
-
-    contenedor.appendChild(elemento);
-
-    indice = (indice + 1) % archivos.length;
 }
 
-setInterval(mostrarMedia, 4000);
-mostrarMedia();
-
-/* MUSICA */
-function iniciarMusica() {
-    document.getElementById("musica").play();
+function nextMedia(){
+    index++;
+    if(index >= media.length){
+        index = 0;
+    }
+    showMedia();
 }
+
+showMedia();
 
 /* CORAZONES */
-function crearCorazon() {
-    const corazon = document.createElement("div");
-    corazon.classList.add("corazon");
-    corazon.innerHTML = "💗";
-    corazon.style.left = Math.random() * 100 + "vw";
-    corazon.style.fontSize = Math.random() * 20 + 15 + "px";
-    document.body.appendChild(corazon);
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*20+15+"px";
+    heart.style.animationDuration=Math.random()*3+3+"s";
+    document.body.appendChild(heart);
 
-    setTimeout(() => corazon.remove(), 6000);
+    setTimeout(()=>heart.remove(),6000);
 }
-setInterval(crearCorazon, 300);
 
-/* MENSAJES ROMÁNTICOS */
-const mensajes = [
-    "Eres mi todo 💕",
-    "Mi lugar favorito es contigo 💞",
-    "Siempre tú ❤️",
-    "Mi princesa hermosa 👑",
-    "Te amo infinito 💖"
+setInterval(crearCorazon,300);
+
+/* MENSAJES ROMANTICOS */
+const frases = [
+"Eres el amor de mi vida 💖",
+"Una y mil veces lo intentaría contigo 💕",
+"Eres mi persona favorita en el mundo 🌎",
+"Contigo todo es más bonito 🥰",
+"Siempre tú, siempre nosotros ❤️",
+"Eres mi destino perfecto ✨",
+"Mi lugar favorito es a tu lado 🤍",
+"Eres mi sueño cumplido 💫",
+"Te elegiría en todas mis vidas 💞",
+"Nuestro amor es infinito ♾️",
+"Gracias por existir mi amor 💘",
+"Mi corazón es completamente tuyo 💓",
+"Contigo quiero todo 🫶",
+"Mi futuro tiene tu nombre 💍",
+"Eres mi paz y mi felicidad 🌹",
+"No hay nadie como tú ❤️‍🔥",
+"Te amo más de lo que imaginas 💗",
+"Mi vida cambió cuando llegaste 🌷"
 ];
 
-function crearMensaje() {
+function mostrarMensaje(){
     const msg = document.createElement("div");
-    msg.classList.add("mensaje");
-    msg.innerHTML = mensajes[Math.floor(Math.random() * mensajes.length)];
-    msg.style.left = Math.random() * 90 + "vw";
-    msg.style.top = Math.random() * 90 + "vh";
+    msg.className="mensaje";
+    msg.innerText = frases[Math.floor(Math.random()*frases.length)];
+    msg.style.left=Math.random()*80+"vw";
+    msg.style.top=Math.random()*80+"vh";
     document.body.appendChild(msg);
 
-    setTimeout(() => msg.remove(), 6000);
+    setTimeout(()=>msg.remove(),6000);
 }
-setInterval(crearMensaje, 2000);
+
+setInterval(mostrarMensaje,2500);
 
 </script>
 
