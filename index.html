@@ -153,72 +153,40 @@ const mensajes = [
 "Mi vida contigo es perfecta 💕"
 ];
 
-let index = 0;
-let msgIndex = 0;
-
-const mediaBox = document.getElementById("mediaBox");
-const textBox = document.getElementById("textBox");
+let index=0;
+let msgIndex=0;
+const mediaBox=document.getElementById("mediaBox");
+const textBox=document.getElementById("textBox");
 
 function cambiar(){
+    mediaBox.innerHTML="";
+    textBox.innerHTML=mensajes[msgIndex];
 
-    mediaBox.innerHTML = "";
-    textBox.innerHTML = mensajes[msgIndex];
+    let file=mediaFiles[index];
 
-    let file = mediaFiles[index];
-
-    if(file.endsWith(".mp4")){
-
-        let video = document.createElement("video");
-        video.src = file;
-        video.autoplay = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.style.maxWidth = "100%";
-        video.style.maxHeight = "100%";
-        video.style.objectFit = "contain";
+    if(file.includes(".mp4")){
+        let video=document.createElement("video");
+        video.src=file;
+        video.autoplay=true;
+        video.muted=true;
+        video.playsInline=true;
         mediaBox.appendChild(video);
-
-    } else {
-
-        let img = document.createElement("img");
-        img.src = file;
-        img.style.maxWidth = "100%";
-        img.style.maxHeight = "100%";
-        img.style.objectFit = "contain";
-        mediaBox.appendChild(img);
-    }
-
-    index = (index + 1) % mediaFiles.length;
-    msgIndex = (msgIndex + 1) % mensajes.length;
-}
-
     }else{
-
-        let img = document.createElement("img");
-        img.src = file;
-
-        img.onload = function(){
-            setTimeout(avanzar, 4000);
-        };
-
-        img.onerror = avanzar;
-
+        let img=document.createElement("img");
+        img.src=file;
         mediaBox.appendChild(img);
     }
 
-    msgIndex = (msgIndex + 1) % mensajes.length;
+    index=(index+1)%mediaFiles.length;
+    msgIndex=(msgIndex+1)%mensajes.length;
 }
 
-function avanzar(){
-    index = (index + 1) % mediaFiles.length;
-    mostrarSiguiente();
-}
+setInterval(cambiar,5000);
+cambiar();
 
-mostrarSiguiente();
-
-/* Corazones */
+/* Corazones por toda la pantalla */
 function crearCorazon(){
-    const heart = document.createElement("div");
+    const heart=document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML="❤️";
     heart.style.left=Math.random()*100+"vw";
@@ -226,8 +194,11 @@ function crearCorazon(){
     heart.style.fontSize=(15+Math.random()*30)+"px";
     document.body.appendChild(heart);
 
-    setTimeout(()=>heart.remove(),8000);
+    setTimeout(()=>{
+        heart.remove();
+    },8000);
 }
+
 setInterval(crearCorazon,300);
 
 /* Activar música en móviles */
