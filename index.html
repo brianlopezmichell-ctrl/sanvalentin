@@ -9,58 +9,49 @@ body {
     margin: 0;
     background: linear-gradient(135deg, #5e0b87, #a855f7);
     color: white;
-    font-family: 'Segoe UI', cursive;
+    font-family: Arial;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-/* carta */
-#carta {
+/* inicio */
+#inicio, #carta {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 9999;
 }
 
+#carta { display: none; }
+
 #textoCarta {
-    max-width: 700px;
-    font-size: 1.6em;
-    line-height: 1.6;
+    max-width: 600px;
+    font-size: 20px;
+    line-height: 1.5;
 }
 
 /* contenido */
-#contenido {
+img {
+    width: 320px;
     margin-top: 20px;
-}
-
-img, video {
-    width: 450px;
     border-radius: 20px;
-    margin-top: 20px;
 }
 
 .mensaje {
-    font-size: 1.8em;
+    font-size: 22px;
     margin-top: 20px;
 }
 
-/* botones */
-.boton {
-    padding: 15px 25px;
-    font-size: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    border: none;
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 20px;
     cursor: pointer;
 }
-
-#si { background: #d291ff; color: white; }
-#no { background: #333; color: white; position: absolute; }
 
 /* corazones */
 .corazon {
@@ -79,114 +70,112 @@ img, video {
 
 <body>
 
+<!-- INICIO -->
+<div id="inicio">
+    <h2>💜 Tengo algo importante para ti 🥺</h2>
+    <button onclick="mostrarCarta()">Continuar 💜</button>
+</div>
+
 <!-- CARTA -->
 <div id="carta">
     <div id="textoCarta"></div>
-    <button class="boton" onclick="empezar()">Continuar 💜</button>
+    <button onclick="empezar()">Ver recuerdos 💜</button>
 </div>
-
-<!-- música -->
-<audio autoplay loop>
-    <source src="cancion.mp3" type="audio/mpeg">
-</audio>
 
 <div id="contenido"></div>
 
 <script>
-/* CARTA */
+
+/* mostrar carta */
+function mostrarCarta(){
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("carta").style.display="flex";
+    escribirCarta();
+}
+
+/* carta animada */
 const cartaTexto = `💜 Hola...
 He estado pensando mucho en nosotros...
 
-En todo lo que vivimos 🥺
-En cada momento, cada risa 💞
+En todo lo que vivimos 🥺💞
+En cada risa, cada momento ✨
 
 Sé que tuvimos problemas...
 pero lo nuestro fue real 💖
 
 Y no quiero soltarnos 💜
 
-Aún creo en nosotros ✨`;
+Aún creo en nosotros 🥺💗`;
 
-let i = 0;
+let i=0;
 function escribirCarta(){
     if(i < cartaTexto.length){
-        document.getElementById("textoCarta").innerHTML += cartaTexto.charAt(i);
+        document.getElementById("textoCarta").innerHTML += cartaTexto[i];
         i++;
-        setTimeout(escribirCarta, 30);
+        setTimeout(escribirCarta,30);
     }
 }
-escribirCarta();
 
+/* empezar fotos */
 function empezar(){
-    document.getElementById("carta").style.display = "none";
-    mostrarElemento();
+    document.getElementById("carta").style.display="none";
+    mostrar();
 }
 
-/* ELEMENTOS COMPLETOS */
-const elementos = [
-
-{tipo:"img", src:"foto1.jpg", texto:"💜 Porque no deberías soltarnos 💕"},
-{tipo:"img", src:"foto2.jpg", texto:"💞 Porque lo nuestro vale la pena 💖"},
-{tipo:"img", src:"foto3.jpg", texto:"💓 Porque aún podemos ser felices 🥺"},
-{tipo:"img", src:"foto4.jpg", texto:"💜 Porque juntos éramos mejores ✨"},
-{tipo:"img", src:"foto5.jpg", texto:"💖 Porque no todo lo bonito se deja ir 😞"},
-{tipo:"img", src:"foto6.jpg", texto:"💞 Porque ya superamos cosas 💫"},
-{tipo:"img", src:"foto7.jpg", texto:"💓 Porque aún hay amor ❤️"},
-{tipo:"img", src:"foto8.jpg", texto:"💜 Porque contigo todo tenía sentido ✨"},
-{tipo:"img", src:"foto9.jpg", texto:"💖 Porque estos momentos no se olvidan 😢"},
-{tipo:"img", src:"foto10.jpg", texto:"💞 Porque valemos la pena 💕"},
-{tipo:"img", src:"foto11.jpg", texto:"💓 Porque aún hay futuro 🥺"},
-{tipo:"img", src:"foto12.jpg", texto:"💜 Porque no deberíamos rendirnos 💫"},
-{tipo:"img", src:"foto13.jpg", texto:"💖 Porque aún creo en nosotros 🥺"},
-{tipo:"img", src:"foto14.jpg", texto:"💞 Porque fuimos reales 💕"},
-{tipo:"img", src:"foto15.jpg", texto:"💓 Porque quiero volver a esto 😊"},
-{tipo:"img", src:"foto16.jpg", texto:"💜 Porque te sigo eligiendo 💖"},
-{tipo:"img", src:"foto17.jpg", texto:"💞 Porque no quiero perderte ✨"},
-{tipo:"img", src:"foto27.jpg", texto:"💓 Porque nuestra historia sigue 💫"},
-{tipo:"img", src:"foto29.jpg", texto:"💜 Porque aún te extraño 💖"},
-
-{tipo:"video", src:"video18.mp4", texto:"🎥💜 Porque esto fue real ✨"},
-{tipo:"video", src:"video19.mp4", texto:"🎥💞 Porque lo nuestro existe 💖"},
-{tipo:"video", src:"video20.mp4", texto:"🎥💓 Porque podemos repetirlo 🥺"},
-{tipo:"video", src:"video21.mp4", texto:"🎥💜 Porque fuimos felices 💕"},
-{tipo:"video", src:"video22.mp4", texto:"🎥💖 Porque vale la pena 💫"},
-{tipo:"video", src:"video24.mp4", texto:"🎥💞 Porque no está perdido 🥺"},
-{tipo:"video", src:"video25.mp4", texto:"🎥💓 Porque quiero intentarlo 💜"},
-{tipo:"video", src:"video26.mp4", texto:"🎥💜 Porque tú vales todo 💖"},
-{tipo:"video", src:"video28.mp4", texto:"🎥💞 Porque aún hay amor 💜✨"}
-
+/* fotos */
+const fotos = [
+"foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg",
+"foto6.jpg","foto7.jpg","foto8.jpg","foto9.jpg","foto10.jpg",
+"foto11.jpg","foto12.jpg","foto13.jpg","foto14.jpg","foto15.jpg",
+"foto16.jpg","foto17.jpg","foto27.jpg","foto29.jpg"
 ];
 
-let index = 0;
+const textos = [
+"💜 Porque no deberías soltarnos 🥺💗",
+"💞 Porque lo nuestro vale la pena 💖✨",
+"🥺 Porque aún podemos intentarlo 💕",
+"💜 Porque juntos éramos mejores 💫",
+"💖 Porque fuimos felices 🥰",
+"💞 Porque superamos cosas 💗",
+"💓 Porque aún hay amor 💖",
+"💜 Porque contigo todo tenía sentido 🥺",
+"💖 Porque estos momentos importan 💕",
+"💞 Porque valemos la pena 💫",
+"🥺 Porque aún hay futuro 💗",
+"💜 Porque no debemos rendirnos 💖",
+"💖 Porque creo en nosotros 🥺",
+"💞 Porque fue real 💕",
+"💓 Porque quiero volver a esto 🥰",
+"💜 Porque te sigo eligiendo 💗",
+"💞 Porque no quiero perderte 💖",
+"💓 Porque nuestra historia sigue 💫",
+"💜 Porque aún te extraño 🥺"
+];
 
-function mostrarElemento() {
+let index=0;
+
+function mostrar(){
     const cont = document.getElementById("contenido");
 
-    if(index < elementos.length){
-        const item = elementos[index];
-
-        cont.innerHTML = <div class="mensaje">${item.texto}</div>;
-
-        if(item.tipo === "img"){
-            cont.innerHTML += <img src="${item.src}">;
-        } else {
-            cont.innerHTML += <video src="${item.src}" controls autoplay></video>;
-        }
-
+    if(index < fotos.length){
+        cont.innerHTML = `
+        <div class="mensaje">${textos[index]}</div>
+        <img src="${fotos[index]}">
+        `;
         index++;
-        setTimeout(mostrarElemento, 4000);
+        setTimeout(mostrar,3000);
     } else {
-        mostrarPregunta();
+        final();
     }
 }
 
-/* FINAL */
-function mostrarPregunta(){
+/* final */
+function final(){
     const cont = document.getElementById("contenido");
 
     cont.innerHTML = `
     <div class="mensaje">
-    💜🥺 ¿Estás dispuesta a arriesgar todo por mí otra vez?
+    💜🥺 ¿Estás dispuesta a arriesgar todo por mí otra vez y mejorar por nosotros?
     </div>
     `;
 
@@ -201,30 +190,28 @@ function mostrarPregunta(){
 
     setTimeout(()=>{
         cont.innerHTML += `
-        <button id="si" class="boton">Sí 💜</button>
-        <button id="no" class="boton">No 💔</button>
+        <button onclick="si()">Sí 💜</button>
+        <button id="no">No 💔</button>
         `;
 
-        document.getElementById("si").onclick = () => {
-            cont.innerHTML = `
-            <div class="mensaje" style="font-size:2.5em;">
-            💜✨ Podemos intentarlo otra vez 💖🥺
-            </div>
-            `;
-        };
-
-        const noBtn = document.getElementById("no");
-        noBtn.onmouseover = ()=>{
-            noBtn.style.top = Math.random()*80+"vh";
-            noBtn.style.left = Math.random()*80+"vw";
+        const no = document.getElementById("no");
+        no.onmouseover = ()=>{
+            no.style.position="absolute";
+            no.style.top=Math.random()*80+"vh";
+            no.style.left=Math.random()*80+"vw";
         };
 
     },4000);
 }
 
+function si(){
+    document.getElementById("contenido").innerHTML =
+    "<h1>💜✨ Podemos intentarlo otra vez 💖🥺</h1>";
+}
+
 /* corazones */
 function crearCorazon(){
-    const c = document.createElement("div");
+    const c=document.createElement("div");
     c.className="corazon";
     c.innerHTML="💜";
     c.style.left=Math.random()*100+"vw";
@@ -232,7 +219,7 @@ function crearCorazon(){
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),5000);
 }
-setInterval(crearCorazon,250);
+setInterval(crearCorazon,300);
 
 </script>
 
