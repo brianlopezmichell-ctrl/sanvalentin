@@ -90,18 +90,19 @@ button {
 <script>
 
 /* mostrar carta */
-function iniciarTodo(){
+function mostrarCarta(){
     const audio = document.getElementById("musica");
 
+    // reproducir música (funciona en celular al tocar botón)
     if(audio){
         audio.play().catch(() => {});
     }
 
-    mostrarCarta();
-}
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("carta").style.display="flex";
 
-    // reproducir música
-    document.getElementById("musica").play();
+    escribirCarta();
+}
 
     escribirCarta();
 }
