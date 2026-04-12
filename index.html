@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti 💜</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #5e0b87, #a855f7);
+    color: white;
+    font-family: 'Segoe UI', cursive;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* carta */
+#carta {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+#textoCarta {
+    max-width: 700px;
+    font-size: 1.6em;
+    line-height: 1.6;
+}
+
+/* contenido */
+#contenido {
+    margin-top: 20px;
+}
+
+img, video {
+    width: 450px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.mensaje {
+    font-size: 1.8em;
+    margin-top: 20px;
+}
+
+/* botones */
+.boton {
+    padding: 15px 25px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#si { background: #d291ff; color: white; }
+#no { background: #333; color: white; position: absolute; }
+
+/* corazones */
+.corazon {
+    position: fixed;
+    top: -10px;
+    color: #d291ff;
+    font-size: 20px;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    to { transform: translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- CARTA -->
+<div id="carta">
+    <div id="textoCarta"></div>
+    <button class="boton" onclick="empezar()">Continuar 💜</button>
+</div>
+
+<!-- música -->
+<audio autoplay loop>
+    <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<div id="contenido"></div>
+
+<script>
+/* CARTA */
+const cartaTexto = `💜 Hola...
+He estado pensando mucho en nosotros...
+
+En todo lo que vivimos 🥺
+En cada momento, cada risa 💞
+
+Sé que tuvimos problemas...
+pero lo nuestro fue real 💖
+
+Y no quiero soltarnos 💜
+
+Aún creo en nosotros ✨`;
+
+let i = 0;
+function escribirCarta(){
+    if(i < cartaTexto.length){
+        document.getElementById("textoCarta").innerHTML += cartaTexto.charAt(i);
+        i++;
+        setTimeout(escribirCarta, 30);
+    }
+}
+escribirCarta();
+
+function empezar(){
+    document.getElementById("carta").style.display = "none";
+    mostrarElemento();
+}
+
+/* ELEMENTOS COMPLETOS */
+const elementos = [
+
+{tipo:"img", src:"foto1.jpg", texto:"💜 Porque no deberías soltarnos 💕"},
+{tipo:"img", src:"foto2.jpg", texto:"💞 Porque lo nuestro vale la pena 💖"},
+{tipo:"img", src:"foto3.jpg", texto:"💓 Porque aún podemos ser felices 🥺"},
+{tipo:"img", src:"foto4.jpg", texto:"💜 Porque juntos éramos mejores ✨"},
+{tipo:"img", src:"foto5.jpg", texto:"💖 Porque no todo lo bonito se deja ir 😞"},
+{tipo:"img", src:"foto6.jpg", texto:"💞 Porque ya superamos cosas 💫"},
+{tipo:"img", src:"foto7.jpg", texto:"💓 Porque aún hay amor ❤️"},
+{tipo:"img", src:"foto8.jpg", texto:"💜 Porque contigo todo tenía sentido ✨"},
+{tipo:"img", src:"foto9.jpg", texto:"💖 Porque estos momentos no se olvidan 😢"},
+{tipo:"img", src:"foto10.jpg", texto:"💞 Porque valemos la pena 💕"},
+{tipo:"img", src:"foto11.jpg", texto:"💓 Porque aún hay futuro 🥺"},
+{tipo:"img", src:"foto12.jpg", texto:"💜 Porque no deberíamos rendirnos 💫"},
+{tipo:"img", src:"foto13.jpg", texto:"💖 Porque aún creo en nosotros 🥺"},
+{tipo:"img", src:"foto14.jpg", texto:"💞 Porque fuimos reales 💕"},
+{tipo:"img", src:"foto15.jpg", texto:"💓 Porque quiero volver a esto 😊"},
+{tipo:"img", src:"foto16.jpg", texto:"💜 Porque te sigo eligiendo 💖"},
+{tipo:"img", src:"foto17.jpg", texto:"💞 Porque no quiero perderte ✨"},
+{tipo:"img", src:"foto27.jpg", texto:"💓 Porque nuestra historia sigue 💫"},
+{tipo:"img", src:"foto29.jpg", texto:"💜 Porque aún te extraño 💖"},
+
+{tipo:"video", src:"video18.mp4", texto:"🎥💜 Porque esto fue real ✨"},
+{tipo:"video", src:"video19.mp4", texto:"🎥💞 Porque lo nuestro existe 💖"},
+{tipo:"video", src:"video20.mp4", texto:"🎥💓 Porque podemos repetirlo 🥺"},
+{tipo:"video", src:"video21.mp4", texto:"🎥💜 Porque fuimos felices 💕"},
+{tipo:"video", src:"video22.mp4", texto:"🎥💖 Porque vale la pena 💫"},
+{tipo:"video", src:"video24.mp4", texto:"🎥💞 Porque no está perdido 🥺"},
+{tipo:"video", src:"video25.mp4", texto:"🎥💓 Porque quiero intentarlo 💜"},
+{tipo:"video", src:"video26.mp4", texto:"🎥💜 Porque tú vales todo 💖"},
+{tipo:"video", src:"video28.mp4", texto:"🎥💞 Porque aún hay amor 💜✨"}
+
+];
+
+let index = 0;
+
+function mostrarElemento() {
+    const cont = document.getElementById("contenido");
+
+    if(index < elementos.length){
+        const item = elementos[index];
+
+        cont.innerHTML = <div class="mensaje">${item.texto}</div>;
+
+        if(item.tipo === "img"){
+            cont.innerHTML += <img src="${item.src}">;
+        } else {
+            cont.innerHTML += <video src="${item.src}" controls autoplay></video>;
+        }
+
+        index++;
+        setTimeout(mostrarElemento, 4000);
+    } else {
+        mostrarPregunta();
+    }
+}
+
+/* FINAL */
+function mostrarPregunta(){
+    const cont = document.getElementById("contenido");
+
+    cont.innerHTML = `
+    <div class="mensaje">
+    💜🥺 ¿Estás dispuesta a arriesgar todo por mí otra vez?
+    </div>
+    `;
+
+    setTimeout(()=>{
+        cont.innerHTML += `
+        <div class="mensaje">
+        🥺💗 te amo demasiado...<br>
+        esa es mi niña de cachetitos bonitos 🥰💗
+        </div>
+        `;
+    },2000);
+
+    setTimeout(()=>{
+        cont.innerHTML += `
+        <button id="si" class="boton">Sí 💜</button>
+        <button id="no" class="boton">No 💔</button>
+        `;
+
+        document.getElementById("si").onclick = () => {
+            cont.innerHTML = `
+            <div class="mensaje" style="font-size:2.5em;">
+            💜✨ Podemos intentarlo otra vez 💖🥺
+            </div>
+            `;
+        };
+
+        const noBtn = document.getElementById("no");
+        noBtn.onmouseover = ()=>{
+            noBtn.style.top = Math.random()*80+"vh";
+            noBtn.style.left = Math.random()*80+"vw";
+        };
+
+    },4000);
+}
+
+/* corazones */
+function crearCorazon(){
+    const c = document.createElement("div");
+    c.className="corazon";
+    c.innerHTML="💜";
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+}
+setInterval(crearCorazon,250);
+
+</script>
+
+</body>
+</html>
