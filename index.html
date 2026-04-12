@@ -2,85 +2,72 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz San Valentín 💖</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<title>Para ti 💜</title>
 
 <style>
-body{
-    margin:0;
-    background:linear-gradient(to bottom,#ff7eb3,#ff4d88);
-    font-family:'Poppins',sans-serif;
-    overflow:hidden;
-    color:white;
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #6a0dad, #9b59b6);
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    overflow: hidden;
 }
 
-h1{
-    text-align:center;
-    font-family:'Great Vibes',cursive;
-    font-size:50px;
-    margin-top:20px;
-    text-shadow:0 0 20px white;
+h1 {
+    margin-top: 20px;
 }
 
-.container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-top:20px;
-    gap:40px;
-    padding:20px;
+#contenido {
+    margin-top: 30px;
 }
 
-.media-box{
-    width:60%;
-    height:70vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+img, video {
+    width: 320px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-.media-box img,
-.media-box video{
-    max-width:100%;
-    max-height:100%;
-    border-radius:25px;
-    box-shadow:0 0 40px rgba(255,255,255,0.7);
-    object-fit:contain;
-    animation:fade 1s ease;
+.mensaje {
+    font-size: 1.4em;
+    margin-top: 20px;
+    padding: 15px;
 }
 
-.text-box{
-    width:30%;
-    font-size:20px;
-    line-height:1.6;
-    text-align:left;
-    animation:fadeText 2s ease;
+/* botones */
+.boton {
+    padding: 12px 25px;
+    font-size: 18px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-@keyframes fade{
-    from{opacity:0; transform:scale(0.9);}
-    to{opacity:1; transform:scale(1);}
+#si {
+    background: #d291ff;
+    color: white;
 }
 
-@keyframes fadeText{
-    from{opacity:0; transform:translateX(50px);}
-    to{opacity:1; transform:translateX(0);}
+#no {
+    background: #444;
+    color: white;
+    position: absolute;
 }
 
-/* Corazones */
-.heart{
-    position:fixed;
-    top:-20px;
-    font-size:20px;
-    animation:fall linear infinite;
-    z-index:9999;
+/* corazones */
+.corazon {
+    position: fixed;
+    top: -10px;
+    color: #d291ff;
+    font-size: 20px;
+    animation: caer linear infinite;
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh);
+@keyframes caer {
+    to {
+        transform: translateY(100vh);
     }
 }
 </style>
@@ -88,125 +75,126 @@ h1{
 
 <body>
 
-<h1>💖 Feliz San Valentín mi amor 💖</h1>
+<h1>💜 Para nosotros 💜</h1>
 
-<div class="container">
-    <div class="media-box" id="mediaBox"></div>
-    <div class="text-box" id="textBox"></div>
-</div>
+<!-- Música -->
+<audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-<audio id="musica" src="cancion.mp3" autoplay loop></audio>
+<div id="contenido"></div>
 
 <script>
-const mediaFiles = [
-"foto1.jpg",
-"video18.mp4",
-"foto2.jpg",
-"video24.mp4",
-"foto3.jpg",
-"video25.mp4",
-"foto4.jpg",
-"video26.mp4",
-"foto27.jpg",
-"foto5.jpg",
-"video28.mp4",
-"foto6.jpg",
-"video19.mp4",
-"foto7.jpg",
-"video20.mp4",
-"foto8.jpg",
-"video21.mp4",
-"foto9.jpg",
-"video22.mp4",
-"foto10.jpg",
-"video23.mp4",
-"foto11.jpg",
-"video26.mp4",
-"foto12.jpg",
-"video28.mp4",
-"foto13.jpg",
-"foto14.jpg",
-"foto15.jpg",
-"foto16.jpg",
-"foto17.jpg",
-"foto29.jpg",
+const elementos = [
+    {tipo:"img", src:"foto1.jpg", texto:"Porque contigo viví momentos únicos 💜"},
+    {tipo:"img", src:"foto2.jpg", texto:"Porque nuestra historia vale la pena"},
+    {tipo:"img", src:"foto3.jpg", texto:"Porque aún me haces feliz"},
+    {tipo:"img", src:"foto4.jpg", texto:"Porque juntos somos mejores"},
+    {tipo:"img", src:"foto5.jpg", texto:"Porque no quiero perderte"},
+    {tipo:"img", src:"foto6.jpg", texto:"Porque superamos muchas cosas"},
+    {tipo:"img", src:"foto7.jpg", texto:"Porque aún hay amor"},
+    {tipo:"img", src:"foto8.jpg", texto:"Porque contigo todo era especial"},
+    {tipo:"img", src:"foto9.jpg", texto:"Porque extraño nuestra felicidad"},
+    {tipo:"img", src:"foto10.jpg", texto:"Porque vales mucho para mí"},
+    {tipo:"img", src:"foto11.jpg", texto:"Porque quiero construir algo contigo"},
+    {tipo:"img", src:"foto12.jpg", texto:"Porque merecemos otra oportunidad"},
+    {tipo:"img", src:"foto13.jpg", texto:"Porque aún creo en nosotros"},
+    {tipo:"img", src:"foto14.jpg", texto:"Porque fuimos felices"},
+    {tipo:"img", src:"foto15.jpg", texto:"Porque quiero volver a sonreír contigo"},
+    {tipo:"img", src:"foto16.jpg", texto:"Porque te sigo eligiendo"},
+    {tipo:"img", src:"foto17.jpg", texto:"Porque no quiero rendirme"},
+    {tipo:"img", src:"foto27.jpg", texto:"Porque aún tenemos historia"},
+    {tipo:"img", src:"foto29.jpg", texto:"Porque te extraño 💜"},
+
+    {tipo:"video", src:"video18.mp4", texto:"Porque nuestros recuerdos siguen vivos"},
+    {tipo:"video", src:"video19.mp4", texto:"Porque todo esto fue real"},
+    {tipo:"video", src:"video20.mp4", texto:"Porque quiero más momentos así"},
+    {tipo:"video", src:"video21.mp4", texto:"Porque juntos éramos felices"},
+    {tipo:"video", src:"video22.mp4", texto:"Porque aún podemos mejorar"},
+    {tipo:"video", src:"video24.mp4", texto:"Porque no todo está perdido"},
+    {tipo:"video", src:"video25.mp4", texto:"Porque quiero intentarlo otra vez"},
+    {tipo:"video", src:"video26.mp4", texto:"Porque vales la pena"},
+    {tipo:"video", src:"video28.mp4", texto:"Porque te sigo amando 💜"}
 ];
 
-const mensajes = [
-"Eres el amor de mi vida ❤️",
-"Una y mil veces lo intentaría contigo 💕",
-"Contigo quiero todo 🥹",
-"Eres mi lugar favorito 🌎",
-"Mi persona favorita 💖",
-"Eres mi para siempre 💍",
-"Gracias por existir ❤️",
-"Te elegiría en todas mis vidas 💞",
-"Eres mi sueño cumplido ✨",
-"Te amo más de lo que imaginas 💘",
-"Eres mi paz 🫶",
-"Mi felicidad tiene tu nombre 😘",
-"Siempre tú 💗",
-"Mi corazón es tuyo ❤️",
-"No hay nadie como tú 💓",
-"Eres mi destino 💫",
-"Contigo todo es mejor 🌸",
-"Mi amor eterno 💖",
-"Mi razón de sonreír 😊",
-"Mi vida contigo es perfecta 💕"
-];
+let index = 0;
 
-let index=0;
-let msgIndex=0;
-const mediaBox=document.getElementById("mediaBox");
-const textBox=document.getElementById("textBox");
+function mostrarElemento() {
+    const cont = document.getElementById("contenido");
+    cont.innerHTML = "";
 
-function cambiar(){
-    mediaBox.innerHTML="";
-    textBox.innerHTML=mensajes[msgIndex];
+    if(index < elementos.length){
+        const item = elementos[index];
 
-    let file=mediaFiles[index];
+        const texto = document.createElement("div");
+        texto.className = "mensaje";
+        texto.innerText = item.texto;
 
-    if(file.includes(".mp4")){
-        let video=document.createElement("video");
-        video.src=file;
-        video.autoplay=true;
-        video.muted=true;
-        video.playsInline=true;
-        mediaBox.appendChild(video);
-    }else{
-        let img=document.createElement("img");
-        img.src=file;
-        mediaBox.appendChild(img);
+        cont.appendChild(texto);
+
+        if(item.tipo === "img"){
+            const img = document.createElement("img");
+            img.src = item.src;
+            cont.appendChild(img);
+        } else {
+            const video = document.createElement("video");
+            video.src = item.src;
+            video.controls = true;
+            video.autoplay = true;
+            cont.appendChild(video);
+        }
+
+        index++;
+        setTimeout(mostrarElemento, 4000);
+    } else {
+        mostrarPregunta();
     }
-
-    index=(index+1)%mediaFiles.length;
-    msgIndex=(msgIndex+1)%mensajes.length;
 }
 
-setInterval(cambiar,5000);
-cambiar();
+function mostrarPregunta(){
+    const cont = document.getElementById("contenido");
+    cont.innerHTML = `
+        <div class="mensaje">
+        ¿Estás dispuesta a arriesgar todo por mí otra vez y dar lo mejor de ti por nosotros? 💜
+        </div>
+        <button id="si" class="boton">Sí 💜</button>
+        <button id="no" class="boton">No 💔</button>
+    `;
 
-/* Corazones por toda la pantalla */
-function crearCorazon(){
-    const heart=document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*5)+"s";
-    heart.style.fontSize=(15+Math.random()*30)+"px";
-    document.body.appendChild(heart);
+    document.getElementById("si").onclick = () => {
+        cont.innerHTML = `
+            <div class="mensaje" style="font-size:2em;">
+            💜 Podemos intentarlo otra vez 💜
+            </div>
+        `;
+    };
 
-    setTimeout(()=>{
-        heart.remove();
-    },8000);
+    const noBtn = document.getElementById("no");
+    noBtn.onmouseover = () => {
+        noBtn.style.top = Math.random() * 80 + "vh";
+        noBtn.style.left = Math.random() * 80 + "vw";
+    };
 }
 
-setInterval(crearCorazon,300);
+mostrarElemento();
 
-/* Activar música en móviles */
-document.addEventListener("click",function(){
-    document.getElementById("musica").play();
-});
+/* corazones */
+function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.innerHTML = "💜";
+
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 5000);
+}
+
+setInterval(crearCorazon, 300);
 </script>
 
 </body>
