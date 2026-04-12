@@ -90,10 +90,15 @@ button {
 <script>
 
 /* mostrar carta */
-function mostrarCarta(){
-   function mostrarCarta(){
-    document.getElementById("inicio").style.display="none";
-    document.getElementById("carta").style.display="flex";
+function iniciarTodo(){
+    const audio = document.getElementById("musica");
+
+    if(audio){
+        audio.play().catch(() => {});
+    }
+
+    mostrarCarta();
+}
 
     // reproducir música
     document.getElementById("musica").play();
