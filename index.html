@@ -90,12 +90,12 @@ img, video {
 <!-- CARTA -->
 <div id="carta">
     <div id="textoCarta"></div>
-    <button class="boton" onclick="empezar()">Continuar 💜</button>
+    <button class="boton" id="continuar">Continuar 💜</button>
 </div>
 
 <!-- música -->
 <audio autoplay loop>
-    <source src="musica.mp3" type="audio/mpeg">
+    <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
 <div id="contenido"></div>
@@ -122,7 +122,7 @@ Y aún quiero intentarlo contigo 💕`;
 let i = 0;
 function escribirCarta(){
     if(i < cartaTexto.length){
-        document.getElementById("textoCarta").innerHTML += cartaTexto.charAt(i);
+        document.getElementById("continuar").addEventListener( "click", empezar);
         i++;
         setTimeout(escribirCarta, 30);
     }
