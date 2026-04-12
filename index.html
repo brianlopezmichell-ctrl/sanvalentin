@@ -16,19 +16,19 @@ body {
 
 /* carta */
 #carta {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.85);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    flex-direction: column;
+    z-index: 9999;
 }
 
 #textoCarta {
-    max-width: 650px;
+    max-width: 700px;
     font-size: 1.6em;
     line-height: 1.6;
 }
@@ -40,30 +40,22 @@ body {
 
 img, video {
     width: 450px;
-    border-radius: 25px;
+    border-radius: 20px;
     margin-top: 20px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.6);
 }
 
 .mensaje {
-    font-size: 1.9em;
+    font-size: 1.8em;
     margin-top: 20px;
-    padding: 15px;
-    animation: aparecer 1s ease;
-}
-
-@keyframes aparecer {
-    from {opacity:0; transform: scale(0.9);}
-    to {opacity:1; transform: scale(1);}
 }
 
 /* botones */
 .boton {
-    padding: 15px 30px;
-    font-size: 22px;
-    margin: 15px;
+    padding: 15px 25px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 10px;
     border: none;
-    border-radius: 15px;
     cursor: pointer;
 }
 
@@ -75,7 +67,7 @@ img, video {
     position: fixed;
     top: -10px;
     color: #d291ff;
-    font-size: 22px;
+    font-size: 20px;
     animation: caer linear infinite;
 }
 
@@ -90,7 +82,7 @@ img, video {
 <!-- CARTA -->
 <div id="carta">
     <div id="textoCarta"></div>
-    <button class="boton" onclick="empezar">Continuar 💜</button>
+    <button class="boton" onclick="empezar()">Continuar 💜</button>
 </div>
 
 <!-- música -->
@@ -105,24 +97,20 @@ img, video {
 const cartaTexto = `💜 Hola...
 He estado pensando mucho en nosotros...
 
-En todo lo que vivimos, en cada risa 🥺
+En todo lo que vivimos 🥺
+En cada momento, cada risa 💞
 
 Sé que tuvimos problemas...
-pero lo nuestro fue real 💞
+pero lo nuestro fue real 💖
 
-No todo fue perfecto, pero fue sincero 💖
+Y no quiero soltarnos 💜
 
-Y aunque ahora estemos así...
-no puedo olvidarnos 💜
-
-Lo nuestro vale la pena ✨
-
-Y aún quiero intentarlo contigo 💕`;
+Aún creo en nosotros ✨`;
 
 let i = 0;
 function escribirCarta(){
     if(i < cartaTexto.length){
-        document.getElementById("continuar").addEventListener("click", empezar);
+        document.getElementById("textoCarta").innerHTML += cartaTexto.charAt(i);
         i++;
         setTimeout(escribirCarta, 30);
     }
@@ -130,21 +118,13 @@ function escribirCarta(){
 escribirCarta();
 
 function empezar(){
-    const carta = document.getElementById("carta");
-
-    // animación suave
-    carta.style.transition = "opacity 0.6s";
-    carta.style.opacity = "0";
-
-    setTimeout(() => {
-        carta.style.display = "none";
-        mostrarElemento();
-    }, 600);
-
+    document.getElementById("carta").style.display = "none";
+    mostrarElemento();
 }
 
-/* ELEMENTOS */
+/* ELEMENTOS COMPLETOS */
 const elementos = [
+
 {tipo:"img", src:"foto1.jpg", texto:"💜 Porque no deberías soltarnos 💕"},
 {tipo:"img", src:"foto2.jpg", texto:"💞 Porque lo nuestro vale la pena 💖"},
 {tipo:"img", src:"foto3.jpg", texto:"💓 Porque aún podemos ser felices 🥺"},
@@ -174,13 +154,13 @@ const elementos = [
 {tipo:"video", src:"video25.mp4", texto:"🎥💓 Porque quiero intentarlo 💜"},
 {tipo:"video", src:"video26.mp4", texto:"🎥💜 Porque tú vales todo 💖"},
 {tipo:"video", src:"video28.mp4", texto:"🎥💞 Porque aún hay amor 💜✨"}
+
 ];
 
 let index = 0;
 
 function mostrarElemento() {
     const cont = document.getElementById("contenido");
-    cont.innerHTML = "";
 
     if(index < elementos.length){
         const item = elementos[index];
@@ -194,35 +174,35 @@ function mostrarElemento() {
         }
 
         index++;
-        setTimeout(mostrarElemento, 4500);
+        setTimeout(mostrarElemento, 4000);
     } else {
         mostrarPregunta();
     }
 }
 
-/* PARTE FINAL CORREGIDA */
+/* FINAL */
 function mostrarPregunta(){
     const cont = document.getElementById("contenido");
 
     cont.innerHTML = `
     <div class="mensaje">
-    💜🥺 ¿Estás dispuesta a arriesgar todo por mí otra vez y dar lo mejor de ti por nosotros?
+    💜🥺 ¿Estás dispuesta a arriesgar todo por mí otra vez?
     </div>
     `;
 
-    setTimeout(() => {
+    setTimeout(()=>{
         cont.innerHTML += `
         <div class="mensaje">
         🥺💗 te amo demasiado...<br>
         esa es mi niña de cachetitos bonitos 🥰💗
         </div>
         `;
-    }, 2500);
+    },2000);
 
-    setTimeout(() => {
+    setTimeout(()=>{
         cont.innerHTML += `
-        <button class="boton" id="si">Sí 💜</button>
-        <button class="boton" id="no">No 💔</button>
+        <button id="si" class="boton">Sí 💜</button>
+        <button id="no" class="boton">No 💔</button>
         `;
 
         document.getElementById("si").onclick = () => {
@@ -234,25 +214,25 @@ function mostrarPregunta(){
         };
 
         const noBtn = document.getElementById("no");
-        noBtn.onmouseover = () => {
+        noBtn.onmouseover = ()=>{
             noBtn.style.top = Math.random()*80+"vh";
             noBtn.style.left = Math.random()*80+"vw";
         };
 
-    }, 4500);
+    },4000);
 }
 
 /* corazones */
-function crearCorazon() {
-    const corazon = document.createElement("div");
-    corazon.classList.add("corazon");
-    corazon.innerHTML = "💜";
-    corazon.style.left = Math.random() * 100 + "vw";
-    corazon.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(corazon);
-    setTimeout(() => corazon.remove(), 5000);
+function crearCorazon(){
+    const c = document.createElement("div");
+    c.className="corazon";
+    c.innerHTML="💜";
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
 }
-setInterval(crearCorazon, 250);
+setInterval(crearCorazon,250);
 
 </script>
 
