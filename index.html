@@ -90,7 +90,7 @@ img, video {
 <!-- CARTA -->
 <div id="carta">
     <div id="textoCarta"></div>
-    <button class="boton" id="continuar">Continuar 💜</button>
+    <button class="boton" onclick="empezar">Continuar 💜</button>
 </div>
 
 <!-- música -->
@@ -129,14 +129,18 @@ function escribirCarta(){
 }
 escribirCarta();
 
-unction empezar(){
+function empezar(){
     const carta = document.getElementById("carta");
+
+    // animación suave
+    carta.style.transition = "opacity 0.6s";
     carta.style.opacity = "0";
 
     setTimeout(() => {
         carta.style.display = "none";
         mostrarElemento();
-    }, 500);
+    }, 600);
+
 }
 
 /* ELEMENTOS */
