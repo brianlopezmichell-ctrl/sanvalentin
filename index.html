@@ -122,16 +122,21 @@ Y aún quiero intentarlo contigo 💕`;
 let i = 0;
 function escribirCarta(){
     if(i < cartaTexto.length){
-        document.getElementById("continuar").addEventListener( "click", empezar);
+        document.getElementById("continuar").addEventListener("click", empezar);
         i++;
         setTimeout(escribirCarta, 30);
     }
 }
 escribirCarta();
 
-function empezar(){
-    document.getElementById("carta").style.display = "none";
-    mostrarElemento();
+unction empezar(){
+    const carta = document.getElementById("carta");
+    carta.style.opacity = "0";
+
+    setTimeout(() => {
+        carta.style.display = "none";
+        mostrarElemento();
+    }, 500);
 }
 
 /* ELEMENTOS */
