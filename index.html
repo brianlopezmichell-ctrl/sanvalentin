@@ -11,10 +11,9 @@ body {
     color: white;
     font-family: Arial;
     text-align: center;
-    overflow-x: hidden;
 }
 
-/* inicio */
+/* pantallas */
 #inicio, #carta {
     position: fixed;
     width: 100%;
@@ -27,12 +26,6 @@ body {
 }
 
 #carta { display: none; }
-
-#textoCarta {
-    max-width: 600px;
-    font-size: 20px;
-    line-height: 1.5;
-}
 
 /* contenido */
 img {
@@ -69,7 +62,8 @@ button {
 </head>
 
 <body>
-    <audio id="musica" loop>
+
+<audio id="musica" loop>
     <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
@@ -89,24 +83,7 @@ button {
 
 <script>
 
-/* mostrar carta */
-function mostrarCarta(){
-    const audio = document.getElementById("musica");
-
-    // reproducir música (funciona en celular al tocar botón)
-    if(audio){
-        audio.play().catch(() => {});
-    }
-
-    document.getElementById("inicio").style.display="none";
-    document.getElementById("carta").style.display="flex";
-
-    escribirCarta();
-}
-
-    escribirCarta();
-}
-/* carta animada */
+/* CARTA */
 const cartaTexto = `💜 Hola...
 He estado pensando mucho en nosotros...
 
@@ -120,22 +97,34 @@ Y no quiero soltarnos 💜
 
 Aún creo en nosotros 🥺💗`;
 
-let i=0;
+let i = 0;
+
 function escribirCarta(){
     if(i < cartaTexto.length){
         document.getElementById("textoCarta").innerHTML += cartaTexto[i];
         i++;
-        setTimeout(escribirCarta,30);
+        setTimeout(escribirCarta, 30);
     }
 }
 
-/* empezar fotos */
+/* MOSTRAR CARTA */
+function mostrarCarta(){
+    const audio = document.getElementById("musica");
+    audio.play().catch(() => {});
+
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("carta").style.display = "flex";
+
+    escribirCarta();
+}
+
+/* EMPEZAR */
 function empezar(){
     document.getElementById("carta").style.display="none";
     mostrar();
 }
 
-/* fotos */
+/* FOTOS */
 const fotos = [
 "foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg",
 "foto6.jpg","foto7.jpg","foto8.jpg","foto9.jpg","foto10.jpg",
@@ -165,7 +154,7 @@ const textos = [
 "💜 Porque aún te extraño 🥺"
 ];
 
-let index=0;
+let index = 0;
 
 function mostrar(){
     const cont = document.getElementById("contenido");
@@ -176,13 +165,13 @@ function mostrar(){
         <img src="${fotos[index]}">
         `;
         index++;
-        setTimeout(mostrar,3000);
+        setTimeout(mostrar, 3000);
     } else {
         final();
     }
 }
 
-/* final */
+/* FINAL */
 function final(){
     const cont = document.getElementById("contenido");
 
@@ -222,9 +211,9 @@ function si(){
     "<h1>💜✨ Podemos intentarlo otra vez 💖🥺</h1>";
 }
 
-/* corazones */
+/* CORAZONES */
 function crearCorazon(){
-    const c=document.createElement("div");
+    const c = document.createElement("div");
     c.className="corazon";
     c.innerHTML="💜";
     c.style.left=Math.random()*100+"vw";
